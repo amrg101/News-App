@@ -1,4 +1,4 @@
-package com.amrg.newsapp.data.mapper
+package com.amrg.newsapp.data.remote.mapper
 
 import com.amrg.newsapp.data.remote.models.responses.ArticleApi
 import com.amrg.newsapp.data.remote.models.responses.SourceApi

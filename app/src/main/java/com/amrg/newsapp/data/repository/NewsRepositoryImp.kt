@@ -1,8 +1,9 @@
 package com.amrg.newsapp.data.repository
 
 import com.amrg.newsapp.data.local.ArticleDatabase
-import com.amrg.newsapp.data.mapper.toArticle
-import com.amrg.newsapp.data.mapper.toArticleEntity
+import com.amrg.newsapp.data.remote.mapper.toArticle
+import com.amrg.newsapp.data.local.mapper.toArticleEntity
+import com.amrg.newsapp.data.local.mapper.toArticle
 import com.amrg.newsapp.data.remote.ApiService
 import com.amrg.newsapp.domain.models.Article
 import com.amrg.newsapp.domain.repository.NewsRepository

@@ -1,4 +1,4 @@
-package com.amrg.newsapp.data.mapper
+package com.amrg.newsapp.data.local.mapper
 
 import com.amrg.newsapp.data.local.entity.ArticleEntity
 import com.amrg.newsapp.data.local.entity.SourceEntity
