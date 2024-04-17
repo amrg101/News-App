@@ -112,6 +112,9 @@ dependencies {
     //Lottie
     implementation(libs.android.lottie.compose)
 
+    //Custom Tabs
+    implementation(libs.androidx.browser)
+
     //Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

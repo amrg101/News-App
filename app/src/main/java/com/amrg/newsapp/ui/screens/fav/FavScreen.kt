@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,6 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.amrg.newsapp.R
+import com.amrg.newsapp.shared.navigateToCustomTab
 import com.amrg.newsapp.ui.common.ArticleItemCard
 import com.amrg.newsapp.ui.common.NoItems
 import com.amrg.newsapp.ui.screens.home.UserAction
@@ -51,6 +53,7 @@ fun FavScreen(
 
     val savedArticlesState = viewModel.savedArticles
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Scaffold(
         modifier = Modifier
@@ -110,7 +113,14 @@ fun FavScreen(
                                     coverImageUrl = item.urlToImage ?: "",
                                     alpha = itemVisibility.value,
                                     isFav = true,
-                                    onClick = {},
+                                    onClick = {
+                                        item.url?.let { url ->
+                                            navigateToCustomTab(
+                                                context,
+                                                url
+                                            )
+                                        }
+                                    },
                                     onFavCheckedChange = {
                                         viewModel.onAction(UserAction.FavIconDelete(item))
                                         scope.launch {

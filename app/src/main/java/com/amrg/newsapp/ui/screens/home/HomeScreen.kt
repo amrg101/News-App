@@ -44,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -61,6 +62,7 @@ import androidx.wear.compose.material.ContentAlpha
 import coil.annotation.ExperimentalCoilApi
 import com.amrg.newsapp.R
 import com.amrg.newsapp.shared.NetworkObserver
+import com.amrg.newsapp.shared.navigateToCustomTab
 import com.amrg.newsapp.ui.common.ArticleItemCard
 import com.amrg.newsapp.ui.common.NetworkError
 import com.amrg.newsapp.ui.common.ProgressDots
@@ -119,6 +121,7 @@ fun HomeScreenScaffold(
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
+    val context = LocalContext.current
 
     val allArticlesState = viewModel.allArticlesState
     val topBarState = viewModel.topBarState
@@ -214,7 +217,14 @@ fun HomeScreenScaffold(
                                         content = item.description ?: "",
                                         coverImageUrl = item.urlToImage ?: "",
                                         isFav = viewModel.isArticleFav(item),
-                                        onClick = {},
+                                        onClick = {
+                                            item.url?.let { url ->
+                                                navigateToCustomTab(
+                                                    context,
+                                                    url
+                                                )
+                                            }
+                                        },
                                         onFavCheckedChange = { checked ->
                                             if (checked)
                                                 viewModel.onAction(UserAction.FavIconAdd(item))
@@ -276,7 +286,14 @@ fun HomeScreenScaffold(
                                     content = item.description ?: "",
                                     coverImageUrl = item.urlToImage,
                                     isFav = viewModel.isArticleFav(item),
-                                    onClick = {},
+                                    onClick = {
+                                        item.url?.let { url ->
+                                            navigateToCustomTab(
+                                                context,
+                                                url
+                                            )
+                                        }
+                                    },
                                     onFavCheckedChange = { checked ->
                                         if (checked)
                                             viewModel.onAction(UserAction.FavIconAdd(item))
